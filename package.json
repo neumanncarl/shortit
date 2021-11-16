@@ -1,0 +1,19 @@
+{
+  "name": "shortit",
+  "version": "1.0.0",
+  "description": "A simple link shortener",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neumanncarl/shortit.git"
+  },
+  "author": "Carl H. Neumann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neumanncarl/shortit/issues"
+  },
+  "homepage": "https://github.com/neumanncarl/shortit#readme"
+}
