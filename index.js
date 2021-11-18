@@ -1,11 +1,12 @@
 // declaration and initialization of modules, models and functions
 const express = require('express'),
       app = express(),
-      mongoose = require('mongoose');
-      dotenv = require('dotenv');
+      mongoose = require('mongoose'),
+      dotenv = require('dotenv'),
+      bodyParser = require('body-parser');
 
 // configures dotenv to use env variagbles based on the .env file
-dotenv.config()
+dotenv.config();
 
 const index = require("./routes/index");
 
@@ -14,10 +15,12 @@ mongoose.connect(process.env.DB_ENV, {useNewUrlParser: true, useUnifiedTopology:
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.json({limit: '1mb'}));
+app.use(bodyParser.urlencoded({extended: true, limit: '1mb'}));
 
 app.use("/", index);
 app.get("*", function (req, res) {
-
+  res.render("catch");
 });
 
 // starting the server
