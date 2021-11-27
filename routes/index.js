@@ -71,49 +71,43 @@ router.post('/api/url', function (req, res) {
     fullURL = 'http://' + fullURL;
   }
 
-  createShortURL(fullURL, req, res, shortURL);
+  URL.findOneAndUpdate({ full: fullURL }, { $inc: { shortened: 1 } }).then(function (foundURL) {
+    if (foundURL !== null) {
+      var data = {
+        short: foundURL.short,
+        full: foundURL.full
+      }
+      shortURL.data = data;
+      shortURL.success = true;
+      return res.send(JSON.stringify(shortURL));
+    } else {
+      createShortURL(fullURL, req, res, shortURL);
+    }
+  }).catch(function (err) {
+    shortURL.error = 'Oops, something went wrong...';
+    return res.send(JSON.stringify(shortURL));
+  })
 });
 
-// load and count shorted URLs stats
-router.get('/api/stats', function (req, res) {
+// load shortUrl stats
+router.post('/api/stats', function (req, res) {
   var getURLs = {
     success: false
   }
 
   URL.find({}).then(function (allURLs) {
-
-    // count the hits per URL
-    var statsShortened = {};
-    for (var i = 0; i < allURLs.length; i++) {
-      if (statsShortened[allURLs[i].full]) {
-        statsShortened[allURLs[i].full]++
-      } else {
-        statsShortened[allURLs[i].full] = 1;
-      }
-    }
-
-    // create a sorted list of the URLs with the amount of entries (used for the score board)
-    var statsShortenedList = [];
-    var mostShortened;
-    while (Object.keys(statsShortened).length > 0) {
-      mostShortened = Object.keys(statsShortened).reduce(function (a, b) { return statsShortened[a] > statsShortened[b] ? a : b });
-      statsShortenedList.push({ url: mostShortened, shortened: statsShortened[mostShortened] });
-      delete statsShortened[mostShortened];
-    }
-
-    // create list of the shortURLs, sorted by hits
-    var statsHitsList = allURLs.sort(function (a, b) { return b.hits - a.hits });
+    var stats = allURLs.sort(function (a, b) { return b.shortened - a.shortened });
 
     var data = {
-      shortened: statsShortenedList,
-      hits: statsHitsList
+      stats: stats,
     }
 
-    // send back the stats
     getURLs.success = true;
     getURLs.data = data;
+    console.log(getURLs.data)
     return res.send(JSON.stringify(getURLs));
   }).catch(function (err) {
+    console.log(err)
     getURLs.error = 'Oops, something went wrong...';
     return res.send(JSON.stringify(getURLs));
   })
