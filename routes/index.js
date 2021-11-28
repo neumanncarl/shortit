@@ -104,10 +104,8 @@ router.post('/api/stats', function (req, res) {
 
     getURLs.success = true;
     getURLs.data = data;
-    console.log(getURLs.data)
     return res.send(JSON.stringify(getURLs));
   }).catch(function (err) {
-    console.log(err)
     getURLs.error = 'Oops, something went wrong...';
     return res.send(JSON.stringify(getURLs));
   })
