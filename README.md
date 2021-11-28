@@ -1,24 +1,13 @@
-# shortit
+# Shortit
+A simple link shortener.
 
-## Project setup
+### Usage
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
 npm run build
+cp -r dist/ public/
+pm2 start app.js
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Live-Version
+See [Shortit](https://crlnm.com/).
