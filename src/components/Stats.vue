@@ -27,7 +27,9 @@ export default {
 
 <style scoped>
 table {
-  margin: 1rem 0 0 1rem;
+  width: 95%;
+  margin: auto;
+  margin-top: 1rem;
   border-collapse: collapse;
 }
 
@@ -42,11 +44,5 @@ th {
 
 tr {
   border-bottom: 1px solid rgb(180, 180, 180);
-}
-
-@media screen and (max-width: 720px) {
-  table {
-    margin-left: 0;
-  }
 }
 </style>

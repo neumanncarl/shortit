@@ -1,14 +1,14 @@
 <template>
-  <td class="stats-url col-10">
+  <td class="stats-url">
     <span class="stats-short">
       <a :href="'https://crlnm.com/l/' + stat.short">{{ `crlnm.com/l/${stat.short}` }}</a>
     </span>
     <span class="stats-full">{{ stat.full }}</span>
   </td>
-  <td class="stats-shortened col-1">
+  <td class="stats-shortened">
     {{ stat.shortened }}
   </td>
-  <td class="stats-hits col-1">
+  <td class="stats-hits">
     {{ stat.hits }}
   </td>
 </template>

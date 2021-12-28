@@ -6,7 +6,7 @@ A simple link shortener.
 npm install
 npm run build
 cp -r dist/ public/
-pm2 start app.js
+npm start
 ```
 
 ### Live-Version

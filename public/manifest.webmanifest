@@ -1,0 +1,16 @@
+{
+    "short_name": "Shortit",
+    "name": "Shortit: A simple link shortener.",
+    "icons": [
+      {
+        "src": "/icon.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#0044c4",
+    "description": "A simple link shortener."
+  }

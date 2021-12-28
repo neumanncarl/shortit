@@ -1,14 +1,14 @@
 <template>
-  <div class="row">
-    <div class="col-12">
-      <span class="full-url">{{ full }}</span>
-      <span>
-        <span class="short-url">
-          <a :href="short">{{ short }}</a>
-        </span>
-        <span><Button @btn-click="copy" text="Copy" /></span>
+  <div class="link">
+    <span class="full-url">{{ full }}</span>
+    <span>
+      <span class="short-url">
+        <a :href="short">{{ short }}</a>
       </span>
-    </div>
+      <span class="copy"
+        ><Button class="btn" @btn-click="copy" :text="text"
+      /></span>
+    </span>
   </div>
 </template>
 
@@ -24,18 +24,31 @@ export default {
     full: String,
     short: String,
   },
+  data() {
+    return {
+      text: "Copy"
+    };
+  },
   methods: {
     copy() {
       var shortUrl = document.getElementsByClassName("short-url")[0];
       navigator.clipboard.writeText(shortUrl.innerText);
+      this.text = "Copied!";
+      setTimeout(() => this.text = "Copy", 1000);
     },
   },
 };
 </script>
 
 <style scoped>
-div.col-12 {
+.link {
   display: flex;
+  padding: 16px 20px;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  font-size: 18px;
+  list-style: none;
   height: auto;
   border-radius: 10px;
   border: 1px solid rgb(0, 68, 196);
@@ -43,18 +56,8 @@ div.col-12 {
   justify-content: space-between;
   align-items: center;
   position: relative;
-}
-
-Button {
-  padding: 8px 20px;
-  font-size: 1rem;
-  background-color: rgb(221, 233, 255);
-  color: rgb(0, 68, 196);
-  font-weight: 300;
-}
-
-Button:active {
-  background-color: rgb(201, 212, 233);
+  width: 95%;
+  margin: 1rem auto;
 }
 
 span {
@@ -65,12 +68,6 @@ span {
   font-weight: 300;
 }
 
-a {
-  text-decoration: none;
-  color: rgb(0, 68, 196);
-  cursor: pointer;
-}
-
 .full-url {
   display: inline-block;
   vertical-align: middle;
@@ -78,15 +75,37 @@ a {
 
 .short-url {
   padding-right: 25px;
+  vertical-align: middle;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0, 68, 196);
+  cursor: pointer;
+}
+
+.copy {
+  overflow: unset;
+  padding: 2px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+Button {
+  padding: 8px 20px;
+  font-size: 1rem;
+  position: relative;
+  background-color: rgb(221, 233, 255);
+  color: rgb(0, 68, 196);
+  font-weight: 300;
+  width: 100%;
+}
+
+Button:active {
+  background-color: rgb(201, 212, 233);
 }
 
 @media screen and (max-width: 720px) {
-  div.col-12 {
-    display: block;
-    padding: 15px 20px;
-    text-align: left;
-  }
-
   span {
     display: block;
     padding: 6px 0;
@@ -94,12 +113,21 @@ a {
     text-align: left;
   }
 
-  .btn {
-    width: 100%;
+  .link,
+  .full-url {
+    display: block;
   }
 
   .short-url {
-    padding: 0 0 6px 0;
+    margin-bottom: 1rem;
+  }
+
+  .copy {
+    width: 100%;
+  }
+
+  Button {
+    margin: 0;
   }
 }
 </style>

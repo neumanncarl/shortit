@@ -1,13 +1,13 @@
 <template>
   <form @submit="onSubmit" class="row">
     <input
-      class="full-url-input col-9"
+      class="full-url-input"
       type="text"
       v-model="fullUrl"
       name="fullUrl"
       placeholder="Link to shorten"
     />
-    <input type="submit" value="Shorten" class="btn col-3" />
+    <input type="submit" value="Shorten" class="btn" />
   </form>
 </template>
 
@@ -40,25 +40,22 @@ export default {
   text-align: left;
   border: solid 1px lightgray;
   outline: none;
+  box-sizing: border-box;
+  width: 70%;
 }
 
 .full-url-input:focus {
   border: solid 1px rgb(148, 148, 148);
 }
 
-.btn {
-  margin: 1rem 0 0 1rem;
-}
-
 @media screen and (max-width: 720px) {
   .btn {
+    width: 96%;
     margin-left: 0;
   }
-}
-
-@media screen and (min-width: 720px) {
-  .btn {
-    width: 23%;
+  .full-url-input {
+    width: 96%;
+    margin-bottom: 1rem;
   }
 }
 </style>
